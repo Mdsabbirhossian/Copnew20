@@ -1,0 +1,5 @@
+"Metric","Value","Interpretation"
+"Adjusted Rand Index",0.201847846191111,"Weak"
+"Normalized Mutual Information",NA,NA
+"Silhouette Score (8F)",0.173283059915982,"Overlapping"
+"Silhouette Score (3F)",0.352219518580604,"Weakly separated"

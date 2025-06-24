@@ -1,0 +1,113 @@
+# ======================================================
+# Script: 03b_clustering_hyona_3features.R (FINAL, CLEANED)
+# Author: Farhana Kabir
+# Purpose: K-means clustering on 3 z-scored Hyönä features
+# Outputs: Elbow plot, Scree plot, PCA (PC1 vs PC2), Silhouette, Centroid plot
+# ======================================================
+
+# 1. Setup ----
+library(tidyverse)
+library(cluster)
+library(factoextra)
+library(ggpubr)
+
+# 2. Load data ----
+features_df <- read.csv("C:/Users/farha/ANLP_project/Copnew20/data/features/by_sub_features_wave1_final_10features.csv")
+
+# 3. Select z-scored Hyönä features ----
+features_3 <- features_df %>%
+  select(prog_z, reread_z, lookback_z) %>%
+  drop_na()
+
+# 4. Elbow Method ----
+dir.create("C:/Users/farha/ANLP_project/Copnew20/outputs/plots", recursive = TRUE, showWarnings = FALSE)
+wss_plot_3 <- fviz_nbclust(features_3, kmeans, method = "wss") +
+  labs(title = "Elbow Method: Optimal Clusters (3 Hyönä Features)") +
+  theme_minimal(base_size = 13)
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/elbow_method_3features.png",
+       wss_plot_3, width = 7, height = 5, dpi = 300)
+
+# 5. K-means Clustering ----
+set.seed(42)
+kmeans_3 <- kmeans(features_3, centers = 3, nstart = 25)
+features_df$Cluster_H3F <- NA
+features_df$Cluster_H3F[which(complete.cases(features_df[, c("prog_z", "reread_z", "lookback_z")]))] <- kmeans_3$cluster
+
+# 6. PCA for Visualization ----
+pca_3 <- prcomp(features_3, scale. = TRUE)
+pca_df_3 <- as.data.frame(pca_3$x) %>%
+  mutate(Cluster = factor(kmeans_3$cluster))
+
+# 6a. Scree Plot ----
+scree_3 <- fviz_eig(pca_3, addlabels = TRUE) +
+  labs(title = "PCA Scree Plot: Hyönä 3 Features")
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/pca_scree_3features.png",
+       scree_3, width = 6, height = 4, dpi = 300)
+
+# 6b. PCA Projection: PC1 vs PC2 ----
+p12_3 <- ggplot(pca_df_3, aes(PC1, PC2, color = Cluster)) +
+  geom_point(alpha = 0.7) +
+  stat_ellipse(type = "norm", level = 0.68, linetype = "dashed") +
+  labs(
+    title = "PC1 vs PC2 (Hyönä 3 Features)",
+    x = paste0("PC1 (", round(summary(pca_3)$importance[2, 1] * 100, 1), "%)"),
+    y = paste0("PC2 (", round(summary(pca_3)$importance[2, 2] * 100, 1), "%)")
+  ) +
+  theme_minimal(base_size = 13)
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/pca_3features_PC1_PC2.png",
+       p12_3, width = 8, height = 6, dpi = 300)
+
+# --- Additional PCA Projections for 3 Hyönä Features ---
+
+# (a) PC1 vs PC3
+p13_3 <- ggplot(pca_df_3, aes(PC1, PC3, color = Cluster)) +
+  geom_point(alpha = 0.7) +
+  stat_ellipse(type = "norm", level = 0.68, linetype = "dashed") +
+  labs(
+    title = "PC1 vs PC3 (Hyönä 3 Features)",
+    x = paste0("PC1 (", round(summary(pca_3)$importance[2, 1] * 100, 1), "%)"),
+    y = paste0("PC3 (", round(summary(pca_3)$importance[2, 3] * 100, 1), "%)")
+  ) +
+  theme_minimal(base_size = 13)
+
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/pca_3features_PC1_PC3.png",
+       p13_3, width = 8, height = 6, dpi = 300)
+
+# (b) PC2 vs PC3
+p23_3 <- ggplot(pca_df_3, aes(PC2, PC3, color = Cluster)) +
+  geom_point(alpha = 0.7) +
+  stat_ellipse(type = "norm", level = 0.68, linetype = "dashed") +
+  labs(
+    title = "PC2 vs PC3 (Hyönä 3 Features)",
+    x = paste0("PC2 (", round(summary(pca_3)$importance[2, 2] * 100, 1), "%)"),
+    y = paste0("PC3 (", round(summary(pca_3)$importance[2, 3] * 100, 1), "%)")
+  ) +
+  theme_minimal(base_size = 13)
+
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/pca_3features_PC2_PC3.png",
+       p23_3, width = 8, height = 6, dpi = 300)
+
+# 7. Silhouette Plot ----
+sil <- silhouette(kmeans_3$cluster, dist(features_3))
+sil_plot <- fviz_silhouette(sil) +
+  labs(title = "Silhouette Plot: Hyönä 3 Features")
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/silhouette_3features.png",
+       sil_plot, width = 7, height = 5, dpi = 300)
+
+# 8. Centroid Plot ----
+centroids_3 <- as.data.frame(kmeans_3$centers) %>% mutate(Cluster = paste("C", 1:3))
+centroids_long_3 <- pivot_longer(centroids_3, -Cluster)
+centroid_plot_3 <- ggplot(centroids_long_3, aes(x = name, y = value, fill = Cluster)) +
+  geom_col(position = position_dodge2(preserve = "single")) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  coord_flip() +
+  scale_fill_brewer(palette = "Set2") +
+  theme_minimal(base_size = 13) +
+  labs(title = "Cluster Centroids: Hyönä 3 Features", x = "Feature", y = "Z-scored Value")
+ggsave("C:/Users/farha/ANLP_project/Copnew20/outputs/plots/centroids_3features.png",
+       centroid_plot_3, width = 10, height = 6, dpi = 300)
+
+# 9. Save clustered data ----
+write.csv(features_df, "C:/Users/farha/ANLP_project/Copnew20/data/features/clustered_3features.csv", row.names = FALSE)
+
+message("✅ 3-feature clustering complete.")

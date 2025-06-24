@@ -1,0 +1,8 @@
+=== Final Feature Set Summary ===
+Participants: 437 
+Complete cases (%): 68.9 %
+Lookback participants (%): 68.9 %
+Correlation (lookback_count ~ reread_count): 0.097 
+Mean rate (WPM): 216 
+Progressive duration range (ms): 178.8 509.73 
+✅ Diagnostics completed.

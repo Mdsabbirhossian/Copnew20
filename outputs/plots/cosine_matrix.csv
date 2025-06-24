@@ -1,0 +1,37 @@
+"Cluster","G_group","Dist"
+"Cluster 1 (3-Feature)","GG1
+(Low all)",0.000848687709604334
+"Cluster 2 (3-Feature)","GG1
+(Low all)",1.97831497151786
+"Cluster 3 (3-Feature)","GG1
+(Low all)",1.94487002491331
+"Cluster 1 (8-Feature)","GG1
+(Low all)",1.97417133619628
+"Cluster 2 (8-Feature)","GG1
+(Low all)",0.000318546614244131
+"Cluster 3 (8-Feature)","GG1
+(Low all)",0.00683174963522315
+"Cluster 1 (3-Feature)","GG2
+(High reread/lookback)",1.81063071530659
+"Cluster 2 (3-Feature)","GG2
+(High reread/lookback)",0.191554312931383
+"Cluster 3 (3-Feature)","GG2
+(High reread/lookback)",0.371700546299486
+"Cluster 1 (8-Feature)","GG2
+(High reread/lookback)",0.298851587295373
+"Cluster 2 (8-Feature)","GG2
+(High reread/lookback)",1.83241163848637
+"Cluster 3 (8-Feature)","GG2
+(High reread/lookback)",1.78887079000921
+"Cluster 1 (3-Feature)","GG3
+(Low prog, High lookback)",1.82698147156802
+"Cluster 2 (3-Feature)","GG3
+(Low prog, High lookback)",0.230442340178379
+"Cluster 3 (3-Feature)","GG3
+(Low prog, High lookback)",0.0547258603350934
+"Cluster 1 (8-Feature)","GG3
+(Low prog, High lookback)",0.0883667482155415
+"Cluster 2 (8-Feature)","GG3
+(Low prog, High lookback)",1.80674696519284
+"Cluster 3 (8-Feature)","GG3
+(Low prog, High lookback)",1.84960472656294
