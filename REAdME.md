@@ -4,10 +4,10 @@ This project explores unsupervised clustering techniques to uncover individual r
 
 
 ## **Table of Contents**
-1. [Overview](#overview)
-2. [Folder Structure](#folder-structure)
-3. [Feature Overview](#feature-overview)
-4. [How to Run](#how-to-run)
+1. [Overview](#project-overview)
+2. [Folder Structure](#how-it-Works)
+3. [Feature Overview](#setup-nstructions)
+4. [How to Run](#project-structure-diagram)
 5. [Key Outputs](#key-outputs)
 6. [Dependencies](#dependencies)
 
