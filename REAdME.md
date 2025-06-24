@@ -60,7 +60,7 @@ To get started with the project, open your terminal (or Git Bash) and clone the 
 git clone https://github.com/Mdsabbirhossian/Copnew20.git
 cd Copnew20
 
-
+```
 
 ### 2. **Install the dependencies**:
 Make sure you have **R (version ≥ 4.0)** installed.
@@ -69,7 +69,7 @@ Then open R or RStudio, and run:
 
 ```r
 install.packages(c("tidyverse", "cluster", "factoextra", "mclust", "ggpubr", "psych"))
-
+```
 
 ### 4. **Prepare Your Dataset**:
    - source("scripts/01a_preprocessing_and_zscoring.R")
@@ -104,8 +104,8 @@ Here’s the breakdown of the file structure:
 
 ```
 Copnew20/
-├── data/                               # Folder for input features and processed data
-│   └── features/                       # Participant-level datasets
+├── data/                                                # Folder for input features and processed data
+│   └── features/                                        # Participant-level datasets
 │       ├── by_sub_features_wave1.csv                    # Raw extracted features
 │       ├── by_sub_features_wave1_final_10features.csv   # Cleaned final dataset with 10 features
 │       ├── by_sub_with_ggroups.csv                      # Dataset with assigned G1–G3 groups
@@ -113,26 +113,26 @@ Copnew20/
 │       ├── clustered_8features.csv                      # Cluster assignments for 8-feature model
 │       └── ...                                          
 │
-├── outputs/                            # Output folder for all result files
-│   ├── plots/                          # PCA, scree, silhouette, feature profile visualizations
+├── outputs/                                             # Output folder for all result files
+│   ├── plots/                                           # PCA, scree, silhouette, feature profile visualizations
 │   │   ├── pca_3feature.png
 │   │   ├── pca_8feature.png
 │   │   ├── feature_profiles.png
 │   │   └── ...
 │   │
-│   ├── cluster_comparison/            # Evaluation results (metrics, alignment, heatmaps)
+│   ├── cluster_comparison/                              # Evaluation results (metrics, alignment, heatmaps)
 │   │   ├── heatmap_cosine.png
 │   │   ├── heatmap_mahalanobis.png
 │   │   ├── confusion_matrix.png
 │   │   ├── comparison_metrics.csv
 │   │   └── ...
 │   │
-│   └── centroids/                     # Cluster centroid values
+│   └── centroids/                                       # Cluster centroid values
 │       ├── centroids_3features.csv
 │       ├── centroids_8features.csv
 │       └── ...
 │
-├── scripts/                            # All R scripts for running the project pipeline
+├── scripts/                                             # All R scripts for running the project pipeline
 │   ├── 01a_preprocessing_and_zscoring.R
 │   ├── 03a_clustering_8features.R
 │   ├── 03b_K-means_clustering_on_3_z-scored_features.R
@@ -143,9 +143,9 @@ Copnew20/
 │   ├── 10_cluster_3plus1_refix_analysis.R
 │   └── ...
 │
-├── .gitignore                          # Git ignore file to exclude non-essential files from version control
-├── README.md                           # Project documentation file
-└── Copnew20.Rproj                      # R project file for convenient opening in RStudio
+├── .gitignore                                            # Git ignore file to exclude non-essential files from version control
+├── README.md                                             # Project documentation file
+└── Copnew20.Rproj                                        # R project file for convenient opening in RStudio
 
 ```
 
